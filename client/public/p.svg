@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="89px" height="89px" viewBox="0 0 89 89" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>m</title>
+    <defs>
+        <circle id="path-1" cx="44.5" cy="44.5" r="44.5"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="m">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#9047FF" xlink:href="#path-1"></use>
+            <text id="p" mask="url(#mask-2)" font-family="Klavika-Medium, Klavika" font-size="110" font-weight="400" fill="#FFFFFF">
+                <tspan x="16" y="69">p</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

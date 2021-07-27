@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "DIMIS";
+  src: local("DIMIS"), url(../fonts/DIMIS___.woff) format("woff");
+  font-family: "Roobert";
+  src: local("Roobert"), url(../fonts/Roobert-Regular.woff) format("woff");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                                  'embedded-opentype', and 'svg' */
+}
+
+.body {
+  font-family: Roobert;
+}
