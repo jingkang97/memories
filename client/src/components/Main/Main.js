@@ -30,7 +30,8 @@ import NotificationsRoundedIcon from '@material-ui/icons/NotificationsRounded';i
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 
-
+import Authorization from '../Authorization/Authorization'
+import Login from '../Login/Login'
 import Feed from '../Feed/Feed'
 import Explore from '../Explore/Explore'
 import Notification from '../Notification/Notification';
@@ -208,7 +209,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function MiniDrawer() {
+function MiniDrawer() {
   const history = useHistory()
   const location = useLocation()
   const classes = useStyles();
@@ -450,3 +451,6 @@ export default function MiniDrawer() {
     </div>
   );
 }
+
+// export default Authenticate(MiniDrawer)
+export default Authorization(MiniDrawer) 
