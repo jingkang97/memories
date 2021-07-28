@@ -29,6 +29,7 @@ import ExploreRoundedIcon from '@material-ui/icons/ExploreRounded';
 import NotificationsRoundedIcon from '@material-ui/icons/NotificationsRounded';import TelegramIcon from '@material-ui/icons/Telegram';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
+import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 
 import Feed from '../Feed/Feed'
 import Explore from '../Explore/Explore'
@@ -38,7 +39,34 @@ import Settings from '../Settings/Settings';
 
 import Logo from '../Logo/Logo';
 import './styles.css'
+import { Button } from '@material-ui/core';
+
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from '@material-ui/core/styles';
+
 const drawerWidth = 200;
+
+
+
+const customTheme = createTheme({
+  transitions: {
+    duration: {
+      shortest: 150,
+      shorter: 200,
+      short: 6000,
+      // most basic recommended timing
+      standard: 10000,
+      // this is to be used in complex animations
+      complex: 375,
+      // recommended when something is entering screen
+      enteringScreen: 225,
+      // recommended when something is leaving screen
+      leavingScreen: 195,
+    },
+  },
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
     display:'flex',
     flexDirection:'row',
     alignItems:'center',
+    width:'100%'
   },
   appBarShift: {
     paddingLeft:'0px',
@@ -145,6 +174,7 @@ const useStyles = makeStyles((theme) => ({
   },
   activeTab:{
     overflowY: 'hidden',
+    // zIndex: '10',
     height: '50px',
     borderLeft: '4px solid white',
   },
@@ -173,7 +203,27 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '-15px 0px 15px 2px #9047ff',
       // clipPath: 'inset(0px 0px 5px 0px)'
   },
+  addButton:{
+    '&:hover': {
+      backgroundPosition:'0 -40px',
+      backgroundSize: '100% 100px',
+      background: 'linear-gradient(45deg, #FE6B8B 40%, #9047ff 90%)',
+      // background: 'pink',
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      transition: "background 0.3s ease-in-out",
+    },
+    backgroundSize: '100% 100px',
+    backgroundPosition: '0 0px',
+    transition: "background 0.3s ease-in-out, box-shadow 0.3s ease-in-out ",
+    background: 'linear-gradient(45deg, #FE6B8B 40%, #9047ff 90%)',
+    // background: 'linear-gradient(45deg, #FE6B8B 5%, #FF8E53 10%, #9047ff 90%)',
+    border: 0,
+    borderRadius: 3,
+    color: 'white',
+    textTransform: 'none',
+  }
 }));
+
 
 export default function MiniDrawer() {
   const history = useHistory()
@@ -201,6 +251,7 @@ export default function MiniDrawer() {
         })}
       >
         <Toolbar>
+          <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', width:'100vw'}}>
           <div style={{display:'flex', flexDirection:'row'}}>
           <div style={{marginRight:'20px', marginLeft:'-5px'}}>
           <Logo />
@@ -218,9 +269,27 @@ export default function MiniDrawer() {
             style={{size:'10px'}}
             />
           </IconButton>
-
           </div>
           
+
+         
+
+          <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+            <Button 
+            className={classes.addButton} 
+            // className="addButton"
+            style={{marginRight:'35px', height:'30px'}}variant="contained">
+            <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+            <AddCircleOutlineRoundedIcon style={{marginLeft:'-8px',height:'15px'}}/>
+            <div className="button">
+                
+              Add Post
+              </div>
+            </div>
+           
+            </Button>
+          </div>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer

@@ -12,3 +12,38 @@
   font-weight: bold;
   /* background-color: pink; */
 }
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  /* margin-top: -3px; */
+  font-family: Roobert;
+  font-size: x-small;
+  font-weight: bold;
+  /* width: 70px; */
+}
+
+/* .addButton{
+  
+  background: #9047ff;
+  background: 'linear-gradient(45deg, #FE6B8B 5%, #FF8E53 10%, #9047ff 90%)',
+  border: 0;
+  border-radius: 3;
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  color: white;
+  text-transform: none;
+  transition: background-color 3s ease
+
+} */
+
+/* .addButton:hover{
+    background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+    background: '#9047ff',
+    box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+    transition: '0.2s'
+    transition: background-color 3 ease;
+
+} */
