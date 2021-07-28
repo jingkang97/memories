@@ -29,13 +29,14 @@ import ExploreRoundedIcon from '@material-ui/icons/ExploreRounded';
 import NotificationsRoundedIcon from '@material-ui/icons/NotificationsRounded';import TelegramIcon from '@material-ui/icons/Telegram';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
-import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+
 
 import Feed from '../Feed/Feed'
 import Explore from '../Explore/Explore'
 import Notification from '../Notification/Notification';
 import Direct from '../Direct/Direct';
 import Settings from '../Settings/Settings';
+import Add from '../Add/Add';
 
 import Logo from '../Logo/Logo';
 import './styles.css'
@@ -90,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     display:'flex',
     flexDirection:'row',
     alignItems:'center',
-    width:'100%'
+    width:'100vw'
   },
   appBarShift: {
     paddingLeft:'0px',
@@ -147,7 +148,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     width:'100%',
     padding: "20px",
-    // backgroundColor:'black',
+    // paddingRight:'100px',
+    backgroundColor:'black',
     color:'white'
   },
   divider: {
@@ -201,27 +203,8 @@ const useStyles = makeStyles((theme) => ({
   shadowElement:{
     height: '60px',
     boxShadow: '-15px 0px 15px 2px #9047ff',
-      // clipPath: 'inset(0px 0px 5px 0px)'
   },
-  addButton:{
-    '&:hover': {
-      backgroundPosition:'0 -40px',
-      backgroundSize: '100% 100px',
-      background: 'linear-gradient(45deg, #FE6B8B 40%, #9047ff 90%)',
-      // background: 'pink',
-      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-      transition: "background 0.3s ease-in-out",
-    },
-    backgroundSize: '100% 100px',
-    backgroundPosition: '0 0px',
-    transition: "background 0.3s ease-in-out, box-shadow 0.3s ease-in-out ",
-    background: 'linear-gradient(45deg, #FE6B8B 40%, #9047ff 90%)',
-    // background: 'linear-gradient(45deg, #FE6B8B 5%, #FF8E53 10%, #9047ff 90%)',
-    border: 0,
-    borderRadius: 3,
-    color: 'white',
-    textTransform: 'none',
-  }
+  
 }));
 
 
@@ -271,23 +254,12 @@ export default function MiniDrawer() {
           </IconButton>
           </div>
           
-
+              
          
 
           <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-            <Button 
-            className={classes.addButton} 
-            // className="addButton"
-            style={{marginRight:'35px', height:'30px'}}variant="contained">
-            <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-            <AddCircleOutlineRoundedIcon style={{marginLeft:'-8px',height:'15px'}}/>
-            <div className="button">
-                
-              Add Post
-              </div>
-            </div>
-           
-            </Button>
+          <Add />
+            
           </div>
           </div>
         </Toolbar>
