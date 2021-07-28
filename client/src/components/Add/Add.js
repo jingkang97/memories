@@ -7,6 +7,12 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import PublishRoundedIcon from '@material-ui/icons/PublishRounded';
 
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 
@@ -37,19 +43,46 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'none',
       },
       card:{
+          position:'relative',
         width:'500px',
-        height:'50vh',
+        height:'420px',
         backgroundColor:'#414241',
-      color:'#C7C7C6'
+      color:'#C7C7C6',
+      padding:'20px',
+      paddingTop:'10px',
+    //   width:'100%'
       },
       postButton:{
+          width:'100%',
           backgroundColor:'#9047ff',
           color:'white',
-        textTransform:'none'
+        textTransform:'none',
+        marginRight:'10px',
+        fontFamily:'Roobert',
+        fontWeight:'bold',
+        '&:hover': {
+            backgroundColor:'#9047ff',
+        }
 
       },
       cancelButton:{
-          textTransform:'none'
+          marginTop:'10px',
+          width:'100%',
+        fontWeight:'bold',
+          textTransform:'none',
+          fontFamily:'Roobert',
+        //   backgroundColor:'#3B3A3E',
+          color:'black',
+          '&:hover': {
+            // backgroundColor:'#3B3A3E',
+        }
+      },
+      input: {
+        color: "white",
+        fontFamily:'Roobert'
+      },
+      divider:{
+        background: 'grey',
       }
   }));
 
@@ -82,9 +115,59 @@ const Add = () => {
 
       <Backdrop className={classes.backdrop} open={open} >
         <Card className={classes.card}>
+            <div style={{position:'absolute', right:'5px', top:'5px'}}>
+                <IconButton size="small" onClick={handleClose}>
+                    <CloseRoundedIcon style={{color:'grey'}}/>
+                </IconButton>
+            </div>
+            <div style={{fontFamily:'Roobert', fontWeight:'bold', fontSize:'20px', display:'flex', flexDirection:'row', justifyContent:'center', marginBottom:'10px'}}>
+                Create Post
+            </div>
+            <Divider classes={{root: classes.divider}}/>
+            <div style={{marginTop:'10px'}}>
+                <div style={{display:'flex', flexDirection:'row'}}>
+                <Avatar alt="P" src="/static/images/avatar/1.jpg" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}/>
+                <div style={{marginLeft:'10px'}}>
+                    User
+                </div>
+                </div>
+            <div style={{height:'90px', overflow:'scroll', marginTop:'10px'}}>
+            <TextField 
+            style={{marginBottom:'20px', width:'100%', color:'white'}}
+            multiline
+            rows={4}
+            InputProps={{ 
+                className: classes.input,
+                disableUnderline: true }}
+            placeholder="What's on your mind?"
+
+            // label="Required"
+            />
+            </div>
+            
+            <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', border:'1px solid grey', marginBottom:'20px',height:'150px', borderRadius:'10px', overflow:'scroll'}}>
+            
+            <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            style={{backgroundColor:'lightgrey', marginBottom:'10px'}}
+            // onClick={handleDrawerOpen}
+          >
+           <PublishRoundedIcon style={{fontSize:'50px', color:'grey'}}/>
+           
+          </IconButton>
+          Click to Upload Image!
+            </div>
+           
+            </div>
+            
+
+            {/* <div style={{marginBottom:'1px', position:'absolute', display:'flex', flexDirection:'row', bottom:'10px', right:'10px', justifyContent:'center'}}> */}
             <Button variant="contained" className={classes.postButton} onClick={handleClose}>Post!</Button>
-            <Button variant="contained" className={classes.cancelButton} onClick={handleClose}>Cancel</Button>
-        </Card>
+            {/* <Button variant="contained" className={classes.cancelButton} onClick={handleClose}>Cancel</Button> */}
+     
+            {/* </div> */}
+              </Card>
         {/* <CircularProgress color="inherit" /> */}
       </Backdrop>
     </div>

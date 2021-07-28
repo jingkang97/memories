@@ -67,8 +67,8 @@ const Feed = () => {
           
           <Paper className={classes.storyContainer}>
           <div style={{width:'10px', display:'flex', flexDirection:'row'}}>
-            <div style={{width:'300px'}}>
-            <Button variant="contained"style={{padding:'10px', color:'white', backgroundColor:'#414241', marginRight:'10px'}} >
+            <div style={{ width:'500px', backgroundColor:'transparent', marginRight:'10px'}}>
+            <Button fullWidth variant="contained"style={{padding:'10px', color:'white', backgroundColor:'#414241'}} >
               <div className="body">
               Create Story  
               <AddRoundedIcon />
