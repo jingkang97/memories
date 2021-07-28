@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { display } from '@material-ui/system';
+import Button from '@material-ui/core/Button';
 
 import Story from '../Story/Story'
 
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     //   color: theme.palette.text.secondary,
     },
     story:{
-      // minWidth:'80px',
+      minWidth:'80px',
     // maxWidth:'300px',
     // width:'80px',
     height:'100px',
@@ -66,7 +67,16 @@ const Feed = () => {
           
           <Paper className={classes.storyContainer}>
           <div style={{width:'10px', display:'flex', flexDirection:'row'}}>
-            <Paper className={classes.story}></Paper>  
+            <div style={{width:'300px'}}>
+            <Button variant="contained"style={{padding:'10px', color:'white', backgroundColor:'#414241', marginRight:'10px'}} >
+              <div className="body">
+              Create Story  
+              <AddRoundedIcon />
+              </div>
+            </Button>
+            </div>
+            
+            
             <Paper className={classes.story}></Paper>  
             <Paper className={classes.story}></Paper>  
             <Paper className={classes.story}></Paper>  
