@@ -4,12 +4,13 @@ import Login from './components/Login/Login'
 import {Route, useHistory, useLocation} from 'react-router-dom'
 
 const App = () => {
+    const location = useLocation()
     return ( 
         <div>
         <Route path="/login" component={Login}/>
             {/* <Login /> */}
             {/* <Logo /> */}
-            <Main />
+          {location.pathname == "/login" ? null : <Main />}
             
         </div>
      );

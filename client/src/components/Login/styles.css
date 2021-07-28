@@ -1,5 +1,5 @@
 .card_header {
-  height: 100px;
+  height: 80px;
   background: linear-gradient(45deg, pink 10%, #fe6b8b 40%, #9047ff 70%);
   background-size: 300% 300%;
   animation: move 5s ease infinite;

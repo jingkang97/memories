@@ -11,7 +11,7 @@ const Authorization = (Page) => {
             return(
                 <div>
                     {/* <Page /> */}
-                    {true==false ? <Page /> : <Redirect to="./login"/>}
+                    {true==true ? <Page /> : <Redirect to="./login"/>}
                     {/* <Page /> */}
                 </div>
             )
