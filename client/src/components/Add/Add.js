@@ -89,8 +89,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Add = () => {
     const classes = useStyles();
+    const [caption, setCaption] = React.useState('')
     const [open, setOpen] = React.useState(false);
+
+    const handleChange = (event) => {
+        setCaption(event.target.value);
+      };
+
     const handleClose = () => {
+        setCaption('')
         setOpen(false);
     };
     const handleToggle = () => {
@@ -135,6 +142,8 @@ const Add = () => {
             <TextField 
             style={{marginBottom:'20px', width:'100%', color:'white'}}
             multiline
+            value={caption}
+            onChange={handleChange}
             rows={4}
             InputProps={{ 
                 className: classes.input,
