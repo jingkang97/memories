@@ -6,7 +6,16 @@ import Card from '@material-ui/core/Card';
 import Logo from '../Logo/Logo'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+
+import PermIdentityRoundedIcon from '@material-ui/icons/PermIdentityRounded';
+import LockRoundedIcon from '@material-ui/icons/LockRounded';
+import EmailRoundedIcon from '@material-ui/icons/EmailRounded';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {Route, useHistory, useLocation} from 'react-router-dom'
 
 import './styles.css'
 import transitions from '@material-ui/core/styles/transitions';
@@ -79,21 +88,30 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   register:{
-    height:'400px', width:'300px', backgroundColor:'#414141',
+    height:'350px', width:'300px', backgroundColor:'#414141',
     transitions:'2s '
   },
   login:{
     height:'350px', width:'300px', backgroundColor:'#414141',
     transitions:'height 2s'
 
+  },
+  colorPrimary: {
+    background: '#9047ff'
   }
 }));
 
 
 const Login = () => {
     const classes = useStyles();
+    const history = useHistory()
     const [auth, setAuth] = React.useState('false')
     const [value, setValue] = React.useState('Login');
+
+
+    const handleClick = () => {
+      history.push('/feed')
+    }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -111,6 +129,9 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <LinearProgress 
+            classes={{barColorPrimary: classes.colorPrimary}}
+            />
 
         <Tabs
         variant="fullWidth"
@@ -126,7 +147,7 @@ const Login = () => {
         <Tab value="Register"className={classes.tabStyle} label="Register" />
       </Tabs>
       <div role="tabpanel" hidden={value !== "Login"}>
-        <div style={{height:'90px', padding:'10px', marginTop:'5px', marginBottom:'0px'}}>
+        <div style={{height:'100%', padding:'10px', marginTop:'5px', marginBottom:'0px'}}>
           
           <TextField 
           fullWidth
@@ -137,7 +158,14 @@ const Login = () => {
           InputProps={{ 
             className: classes.input,
             classes:{notchedOutline:classes.noBorder},
-            disableUnderline: true }}
+            disableUnderline: true ,
+            startAdornment: (
+              <InputAdornment position="start">
+                <PermIdentityRoundedIcon style={{fontSize:'15px', color:'#898989'}}/>
+              </InputAdornment>
+            ),
+          }}
+           
           />
           <TextField 
           type="password"
@@ -148,11 +176,20 @@ const Login = () => {
           InputProps={{ 
             className: classes.input,
             classes:{notchedOutline:classes.noBorder},
-            disableUnderline: true }}
+            disableUnderline: true,
+          
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockRoundedIcon style={{fontSize:'15px', color:'#898989'}}/>
+              </InputAdornment>
+            ),
+          }}
           />
         </div>
         <div style={{width:'inherit', paddingLeft:'10px', paddingRight:'10px', display:'flex', flexDirection:'row', justifyContent:'center', }}>
-        <Button variant="contained" style={{backgroundColor:'#9047ff', color:'white', textTransform:'none', fontFamily:'Roobert', fontWeight:'bold', fontSize:'10px', borderRadius:'20px', width:'100%'}}>Login</Button>
+        <Button 
+        onClick={handleClick}
+        variant="contained" style={{backgroundColor:'#9047ff', color:'white', textTransform:'none', fontFamily:'Roobert', fontWeight:'bold', fontSize:'10px', borderRadius:'20px', width:'100%'}}>Login</Button>
         
         </div>
         <div className={classes.Link}>
@@ -164,7 +201,7 @@ const Login = () => {
       </div>
 
       <div role="tabpanel" hidden={value !== "Register"}>
-        <div style={{height:'180px', padding:'10px', marginTop:'5px', marginBottom:'0px'}}>
+        <div style={{height:'100%', padding:'10px', marginTop:'5px', marginBottom:'0px'}}>
           
           <TextField 
           fullWidth
@@ -175,7 +212,13 @@ const Login = () => {
           InputProps={{ 
             className: classes.input,
             classes:{notchedOutline:classes.noBorder},
-            disableUnderline: true }}
+            disableUnderline: true,
+            startAdornment: (
+              <InputAdornment position="start">
+                <PermIdentityRoundedIcon style={{fontSize:'15px', color:'#898989'}}/>
+              </InputAdornment>
+            ),
+          }}
           />
           <TextField 
           fullWidth
@@ -186,7 +229,13 @@ const Login = () => {
           InputProps={{ 
             className: classes.input,
             classes:{notchedOutline:classes.noBorder},
-            disableUnderline: true }}
+            disableUnderline: true,
+            startAdornment: (
+              <InputAdornment position="start">
+                <EmailRoundedIcon style={{fontSize:'15px', color:'#898989'}}/>
+              </InputAdornment>
+            ),
+          }}
           />
           <TextField 
           type="password"
@@ -198,22 +247,20 @@ const Login = () => {
           InputProps={{ 
             className: classes.input,
             classes:{notchedOutline:classes.noBorder},
-            disableUnderline: true }}
+            disableUnderline: true,
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockRoundedIcon style={{fontSize:'15px', color:'#898989'}}/>
+              </InputAdornment>
+            ),
+          }}
           />
-          <TextField 
-          type="password"
-          fullWidth
-          variant="outlined"
-          margin="dense"
-          placeholder="confirm password ..."
-          InputProps={{ 
-            className: classes.input,
-            classes:{notchedOutline:classes.noBorder},
-            disableUnderline: true }}
-          />
+          
         </div>
         <div style={{width:'inherit', paddingLeft:'10px', paddingRight:'10px', display:'flex', flexDirection:'row', justifyContent:'center', }}>
-        <Button variant="contained" style={{backgroundColor:'#9047ff', color:'white', textTransform:'none', fontFamily:'Roobert', fontWeight:'bold', fontSize:'10px', borderRadius:'20px', width:'100%'}}>Register</Button>
+        <Button 
+        onClick={handleClick}
+        variant="contained" style={{backgroundColor:'#9047ff', color:'white', textTransform:'none', fontFamily:'Roobert', fontWeight:'bold', fontSize:'10px', borderRadius:'20px', width:'100%'}}>Register</Button>
         
         </div>
         

@@ -414,7 +414,7 @@ function MiniDrawer() {
         
         </div>
         
-        <ListItem button>
+        <ListItem button onClick={()=>{history.push('/login')}}>
               <ListItemIcon>
                 <ExitToAppRoundedIcon style={{marginLeft:'7px',color:'grey'}}/> 
                 </ListItemIcon>
