@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         // minWidth:'100px',
         // maxWidth:'300px',
-        height:'210px',
-        width:'200px',
+        height:'190px',
+        width:'170px',
           padding: theme.spacing(2),
           textAlign: 'center',
           backgroundColor:'#414241',
@@ -63,6 +63,7 @@ const Logo = () => {
             {/* <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end', width:'100%'}}>
                     <ClearRoundedIcon style={{fontSize:'15px', cursor:'pointer'}} onClick={handleClose}/>
             </div> */}
+            <div style={{height:'100%',display:'flex', flexDirection:'column',justifyContent:'center', alignContent:'center'}}>
             <div style={{display:'flex', flexDirection:'row', justifyContent:'center', marginTop:'5px'}}>
                 <Tilt
                 className="parallax-effect-img_zoom"
@@ -89,6 +90,8 @@ const Logo = () => {
             &copy; 2021 Jing Kang
 
             </div>
+            </div>
+            
             </Paper>
         </Backdrop>
         

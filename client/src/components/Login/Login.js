@@ -66,7 +66,8 @@ const useStyles = makeStyles((theme) => ({
     fontFamily:'Roobert',
     fontSize:'10px',
     fontSize:'10px',
-    backgroundColor:'#333333'
+    backgroundColor:'#333333',
+    borderRadius:'5px'
     // marginTop:'10px'
   },
   noBorder: {

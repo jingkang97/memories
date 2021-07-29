@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
     addButton:{
         '&:hover': {
+          
           backgroundPosition:'0 -40px',
           backgroundSize: '100% 100px',
           background: 'linear-gradient(45deg, #FE6B8B 40%, #9047ff 90%)',
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         background: 'linear-gradient(45deg, #FE6B8B 40%, #9047ff 90%)',
         // background: 'linear-gradient(45deg, #FE6B8B 5%, #FF8E53 10%, #9047ff 90%)',
         border: 0,
-        borderRadius: 3,
+        borderRadius: 7,
         color: 'white',
         textTransform: 'none',
       },
@@ -51,9 +52,11 @@ const useStyles = makeStyles((theme) => ({
       color:'#C7C7C6',
       padding:'20px',
       paddingTop:'10px',
+      borderRadius:'10px',
     //   width:'100%'
       },
       postButton:{
+
           width:'100%',
           backgroundColor:'#9047ff',
           color:'white',
@@ -61,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight:'10px',
         fontFamily:'Roobert',
         fontWeight:'bold',
+        borderRadius:'10px',
         '&:hover': {
             backgroundColor:'#9047ff',
         }
