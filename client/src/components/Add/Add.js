@@ -13,6 +13,9 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import PublishRoundedIcon from '@material-ui/icons/PublishRounded';
+import FormControl from '@material-ui/core/FormControl';
+
+
 
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 
@@ -103,6 +106,12 @@ const Add = () => {
     const handleToggle = () => {
         setOpen(!open);
     };
+
+    const handleSubmit = () => {
+      setCaption('')
+      setOpen(false);
+      console.log('submit')
+  };
     return ( 
         <div className="body">
             <Button 
@@ -121,7 +130,10 @@ const Add = () => {
             </Button>
 
       <Backdrop className={classes.backdrop} open={open} >
+
         <Card className={classes.card}>
+       
+
             <div style={{position:'absolute', right:'5px', top:'5px'}}>
                 <IconButton size="small" onClick={handleClose}>
                     <CloseRoundedIcon style={{color:'grey'}}/>
@@ -131,6 +143,8 @@ const Add = () => {
                 Create Post
             </div>
             <Divider classes={{root: classes.divider}}/>
+            <form style={{width:'100%'}} onSubmit={handleSubmit}>
+
             <div style={{marginTop:'10px'}}>
                 <div style={{display:'flex', flexDirection:'row'}}>
                 <Avatar alt="P" src="/static/images/avatar/1.jpg" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}/>
@@ -138,6 +152,7 @@ const Add = () => {
                     User
                 </div>
                 </div>
+
             <div style={{height:'90px', overflow:'scroll', marginTop:'10px'}}>
             <TextField 
             style={{marginBottom:'20px', width:'100%', color:'white'}}
@@ -172,9 +187,9 @@ const Add = () => {
             
 
             {/* <div style={{marginBottom:'1px', position:'absolute', display:'flex', flexDirection:'row', bottom:'10px', right:'10px', justifyContent:'center'}}> */}
-            <Button variant="contained" className={classes.postButton} onClick={handleClose}>Post!</Button>
+            <Button variant="contained" type="submit" className={classes.postButton} >Post!</Button>
             {/* <Button variant="contained" className={classes.cancelButton} onClick={handleClose}>Cancel</Button> */}
-     
+              </form>
             {/* </div> */}
               </Card>
         {/* <CircularProgress color="inherit" /> */}
