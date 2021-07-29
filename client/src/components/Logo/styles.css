@@ -18,11 +18,33 @@
   box-shadow: 0px 0px 15px white;
 } */
 
+.parallax-effect-img_zoom {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #9047ff;
+  box-shadow: 0px 0px 10px white;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20%;
+}
+
 @font-face {
   font-family: "DIMIS";
   src: local("DIMIS"), url(../fonts/DIMIS___.woff) format("woff");
+
   /* other formats include: 'woff2', 'truetype, 'opentype',
                             'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+  font-family: "Roobert";
+  src: local("Roobert"), url(../fonts/Roobert-Regular.woff) format("woff");
 }
 
 .inner-element {
@@ -33,6 +55,26 @@
   cursor: pointer;
   /* width: 70%; */
   /* margin-left: 25%; */
+}
+
+.inner-element_zoom {
+  font-family: DIMIS;
+  font-size: 50px;
+  transform: translateZ(30px);
+  border-radius: 50%;
+  cursor: pointer;
+  /* width: 70%; */
+  /* margin-left: 25%; */
+}
+
+.inner-element_zoom:hover {
+  transform: translateZ(30px);
+  text-shadow: 0px 0px 2px pink;
+  /* box-shadow: 0px 0px 5px #9047ff; */
+  /* box-shadow: inset 3px 33px 25px 0 white, inset 10 66px 15px 0px pink,
+    inset 10 10px 5px 0px red; */
+  animation: pulse 1s infinite;
+  transition: 0.2s;
 }
 
 .inner-element:hover {

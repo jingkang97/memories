@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     storyContainer:{
       backgroundColor:'#333333',
       padding:'10px',
-      marginBottom:'10px',
+      // marginBottom:'10px',
       borderRadius:'5px',
       overflowX:'scroll',
       display:'flex',
@@ -82,6 +82,8 @@ const Feed = () => {
     const [storyLoading, setStoryLoading] = React.useState(false)
 
     console.log(posts)
+    const n = 20;
+
 
     return (
     <div className={classes.root}>
@@ -111,39 +113,27 @@ const Feed = () => {
             </Button>
             </div>
 
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
-            <Paper className={classes.story}></Paper>  
+            {[...Array(n)].map((elementInArray, index) => {
+              return(<div className="" key={index}> 
+              <Paper className={classes.story}></Paper> 
+              </div> 
+              )
+            })
+            } 
+
             </div>
           </Paper>
           
-          <div style={{display:'flex',flexDirection:'row', justifyContent:'center', marginTop:'20px', marginBottom:'10px', height:'', alignItems:'center'}}>
-            {!posts.length? <CircularProgress 
-            classes={{circle: classes.colorPrimary}} /> : null}
-          </div>
+            {!posts.length? 
+            <div style={{display:'flex',flexDirection:'row', justifyContent:'center', marginTop:'50px', marginBottom:'10px', height:'', alignItems:'center'}}>
+
+            <CircularProgress 
+            classes={{circle: classes.colorPrimary}} /> 
+            </div>
+            : null}
         </Grid>
         {posts.map((post) => (
-          <Grid key={post.id}item xs={12} sm={6} md={6}>
+          <Grid key={post.id}item xs={12} sm={12} md={12}>
             <Card className={classes.paper}>
               <CardMedia className={classes.media} image={post.selectedFile} />
               {post.caption}
@@ -152,9 +142,6 @@ const Feed = () => {
           </Grid>
         ))}
 
-
-       
-        
       </Grid>
     </div>
   );
