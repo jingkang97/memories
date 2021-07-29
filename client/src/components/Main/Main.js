@@ -148,7 +148,11 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     width:'100%',
-    padding: "20px",
+    paddingRight:'20px',
+    paddingLeft:'20px',
+    paddingBottom:'20px',
+    paddingTop:'10px',
+    // padding: "20px",
     // paddingRight:'100px',
     backgroundColor:'black',
     color:'white'

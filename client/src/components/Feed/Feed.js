@@ -73,6 +73,15 @@ const useStyles = makeStyles((theme) => ({
       // backgroundColor: 'rgba(0, 0, 0, 0.5)',
       // backgroundBlendMode: 'darken',
     },
+    card: {
+      minWidth:'100px',
+      // maxWidth:'300px',
+      height:'200px',
+        // padding: theme.spacing(2),
+        textAlign: 'center',
+        backgroundColor:'#414241',
+        color:'#C7C7C6'
+      },
   }));
 
 const Feed = () => {
@@ -133,8 +142,8 @@ const Feed = () => {
             : null}
         </Grid>
         {posts.map((post) => (
-          <Grid key={post.id}item xs={12} sm={12} md={12}>
-            <Card className={classes.paper}>
+          <Grid key={post.id}item xs={12} sm={6} md={6}>
+            <Card className={classes.card}>
               <CardMedia className={classes.media} image={post.selectedFile} />
               {post.caption}
               {moment(post.createdAt).fromNow()}
