@@ -23,3 +23,16 @@
 .body {
   font-family: Roobert;
 }
+
+.file-upload__icon input[type="file"] {
+  display: none;
+}
+
+.file-upload__icon {
+  /* cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid black;
+  color: black;
+  background: white; */
+  /* And other properties according to your preference */
+}

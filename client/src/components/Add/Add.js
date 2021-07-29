@@ -1,24 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import PublishRoundedIcon from '@material-ui/icons/PublishRounded';
-import FormControl from '@material-ui/core/FormControl';
 
-
+import FileBase from 'react-file-base64'
 
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 
+import {useDispatch} from 'react-redux'
+import {createPost} from '../../actions/posts'
 import './styles.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -86,30 +84,38 @@ const useStyles = makeStyles((theme) => ({
       },
       divider:{
         background: 'grey',
+      },
+      fileInput:{
+        display:'none'
       }
   }));
 
 
 const Add = () => {
     const classes = useStyles();
-    const [caption, setCaption] = React.useState('')
+    const [postData, setPostData] = useState({
+      caption:'',
+      selectedFile:''
+    })
     const [open, setOpen] = React.useState(false);
-
-    const handleChange = (event) => {
-        setCaption(event.target.value);
-      };
+    const dispatch = useDispatch()
+    // const handleChange = (event) => {
+    //     setPostData(event.target.value);
+    // };
 
     const handleClose = () => {
-        setCaption('')
+        setPostData({caption:'', selectedFile:''})
         setOpen(false);
     };
     const handleToggle = () => {
         setOpen(!open);
     };
 
-    const handleSubmit = () => {
-      setCaption('')
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      setPostData({caption:'', selectedFile:''})
       setOpen(false);
+      dispatch(createPost(postData))
       console.log('submit')
   };
     return ( 
@@ -147,7 +153,7 @@ const Add = () => {
 
             <div style={{marginTop:'10px'}}>
                 <div style={{display:'flex', flexDirection:'row'}}>
-                <Avatar alt="P" src="/static/images/avatar/1.jpg" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}/>
+                <Avatar alt="P" src="" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}/>
                 <div style={{marginLeft:'10px'}}>
                     User
                 </div>
@@ -157,8 +163,9 @@ const Add = () => {
             <TextField 
             style={{marginBottom:'20px', width:'100%', color:'white'}}
             multiline
-            value={caption}
-            onChange={handleChange}
+            value={postData.caption}
+            // onChange={handleChange}
+            onChange={(e) => setPostData({...postData, caption: e.target.value})}
             rows={4}
             InputProps={{ 
                 className: classes.input,
@@ -170,15 +177,29 @@ const Add = () => {
             </div>
             
             <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', border:'1px solid grey', marginBottom:'20px',height:'150px', borderRadius:'10px', overflow:'scroll'}}>
-            
-            <IconButton
+           <IconButton
             color="inherit"
             aria-label="open drawer"
-            style={{backgroundColor:'lightgrey', marginBottom:'10px'}}
+            style={{backgroundColor:'', marginBottom:'10px'}}
+            component="label"
+
             // onClick={handleDrawerOpen}
           >
+            
+             
            <PublishRoundedIcon style={{fontSize:'50px', color:'grey'}}/>
-           
+           <label className="file-upload__icon">
+           <FileBase 
+            // className={classes.fileInput}
+            type="file" 
+            multiple={false} 
+            onDone={({base64}) => setPostData({...postData, selectedFile: base64})} />
+            
+            </label>
+            
+           {/* <input 
+             type="file" 
+             hidden/> */}
           </IconButton>
           Click to Upload Image!
             </div>

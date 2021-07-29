@@ -6,7 +6,21 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import { display } from '@material-ui/system';
 import Button from '@material-ui/core/Button';
 
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+
+
 import Story from '../Story/Story'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography'
+
+import {useSelector} from 'react-redux'
+import moment from 'moment';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,12 +37,10 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
       backgroundColor:'#414241',
       color:'#C7C7C6'
-    //   color: theme.palette.text.secondary,
     },
     story:{
       minWidth:'80px',
-    // maxWidth:'300px',
-    // width:'80px',
+
     height:'100px',
       padding: theme.spacing(2),
       textAlign: 'center',
@@ -38,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: 'Roobert',
       marginRight:'10px',
 
-    //   color: theme.palette.text.secondary,
     },
     storyContainer:{
       backgroundColor:'#333333',
@@ -50,24 +61,42 @@ const useStyles = makeStyles((theme) => ({
       flexDirection:'row',
       width:'100%'
     },
-    
+    colorPrimary: {
+      color: '#9047ff'
+    },
+    barColorPrimary: {
+      background: '#9047ff'
+    }
   }));
 
 const Feed = () => {
-
+    const posts = useSelector((state) => state.posts)
     const classes = useStyles();
+    const [feedLoading, setFeedLoading] = React.useState(true)
+    const [storyLoading, setStoryLoading] = React.useState(true)
+
+    console.log(posts)
 
     return (
     <div className={classes.root}>
-
+      <div style={{width:'100%', position:'absolute', top:'50px', left:'0px'}}>
+        {storyLoading?<LinearProgress 
+            classes={{barColorPrimary: classes.barColorPrimary}}
+            />: null}
+      </div>
      
       <Grid container spacing={3} style={{backgroundColor:'transparent'}}>
         
         <Grid item xs={12} sm={12} md={12}>
-          
+        
           <Paper className={classes.storyContainer}>
-          <div style={{width:'10px', display:'flex', flexDirection:'row'}}>
+            
+            
+          
+          <div style={{width:'100px', display:'flex', flexDirection:'row'}}>
+          
             <div style={{ width:'500px', backgroundColor:'transparent', marginRight:'10px'}}>
+            
             <Button fullWidth variant="contained"style={{padding:'10px', color:'white', backgroundColor:'#414241'}} >
               <div className="body">
               Create Story  
@@ -75,8 +104,7 @@ const Feed = () => {
               </div>
             </Button>
             </div>
-            
-            
+
             <Paper className={classes.story}></Paper>  
             <Paper className={classes.story}></Paper>  
             <Paper className={classes.story}></Paper>  
@@ -103,27 +131,23 @@ const Feed = () => {
             </div>
           </Paper>
           
-          
+          <div style={{display:'flex',flexDirection:'row', justifyContent:'center', marginTop:'20px', marginBottom:'10px', height:'', alignItems:'center'}}>
+            {!posts.length? <CircularProgress 
+            classes={{circle: classes.colorPrimary}} /> : null}
+          </div>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={6}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={6}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
+        {posts.map((post) => (
+          <Grid key={post.id}item xs={12} sm={6} md={6}>
+            <Card className={classes.paper}>
+              <CardMedia image={post.selectedFile} />
+              {post.caption}
+              {moment(post.createdAt).fromNow()}
+            </Card>
+          </Grid>
+        ))}
 
-        <Grid item xs={12} sm={6} md={6}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={6}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={6}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
+
+       
         
       </Grid>
     </div>

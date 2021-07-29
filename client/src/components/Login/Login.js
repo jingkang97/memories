@@ -107,7 +107,7 @@ const Login = () => {
     const history = useHistory()
     const [auth, setAuth] = React.useState('false')
     const [value, setValue] = React.useState('Login');
-
+    const [loading, setLoading] = React.useState(false)
 
     const handleClick = () => {
       history.push('/feed')
@@ -129,10 +129,10 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <LinearProgress 
+            {loading?<LinearProgress 
             classes={{barColorPrimary: classes.colorPrimary}}
-            />
-
+            />: null}
+            
         <Tabs
         variant="fullWidth"
         value={value}
