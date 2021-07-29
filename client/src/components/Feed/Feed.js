@@ -66,14 +66,20 @@ const useStyles = makeStyles((theme) => ({
     },
     barColorPrimary: {
       background: '#9047ff'
-    }
+    },
+    media: {
+      height: 150,
+      // paddingTop: '56.25%',
+      // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      // backgroundBlendMode: 'darken',
+    },
   }));
 
 const Feed = () => {
     const posts = useSelector((state) => state.posts)
     const classes = useStyles();
     const [feedLoading, setFeedLoading] = React.useState(true)
-    const [storyLoading, setStoryLoading] = React.useState(true)
+    const [storyLoading, setStoryLoading] = React.useState(false)
 
     console.log(posts)
 
@@ -139,7 +145,7 @@ const Feed = () => {
         {posts.map((post) => (
           <Grid key={post.id}item xs={12} sm={6} md={6}>
             <Card className={classes.paper}>
-              <CardMedia image={post.selectedFile} />
+              <CardMedia className={classes.media} image={post.selectedFile} />
               {post.caption}
               {moment(post.createdAt).fromNow()}
             </Card>
