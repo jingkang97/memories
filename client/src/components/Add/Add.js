@@ -181,17 +181,23 @@ const Add = () => {
             </div>
             
             <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', border:'1px solid grey', marginBottom:'20px',height:'150px', borderRadius:'10px', overflow:'scroll'}}>
-           <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            style={{backgroundColor:'', marginBottom:'10px'}}
-            component="label"
+          
 
-            // onClick={handleDrawerOpen}
-          >
-            
-             
-           <PublishRoundedIcon style={{fontSize:'50px', color:'grey'}}/>
+           
+          {postData.selectedFile ? 
+          <div>
+          <img src={postData.selectedFile} style={{height:'300px', width:'100%'}}/>
+          </div> 
+          : 
+          <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+          <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          style={{backgroundColor:'', marginBottom:'10px', height:'90px', width:'90px', alignSelf:'center'}}
+          component="label"
+           // onClick={handleDrawerOpen}
+           >
+          <PublishRoundedIcon style={{fontSize:'50px', color:'grey'}}/>
            <label className="file-upload__icon">
            <FileBase 
             // className={classes.fileInput}
@@ -205,12 +211,15 @@ const Add = () => {
              type="file" 
              hidden/> */}
           </IconButton>
+          <div>
           Click to Upload Image!
+          </div>
+          </div>
+          }
             </div>
-           
-            </div>
-            
-
+          </div>
+              
+          
             {/* <div style={{marginBottom:'1px', position:'absolute', display:'flex', flexDirection:'row', bottom:'10px', right:'10px', justifyContent:'center'}}> */}
             <Button variant="contained" type="submit" className={classes.postButton} >Post!</Button>
             {/* <Button variant="contained" className={classes.cancelButton} onClick={handleClose}>Cancel</Button> */}

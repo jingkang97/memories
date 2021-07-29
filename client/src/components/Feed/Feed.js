@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -31,11 +31,16 @@ import BookmarkRoundedIcon from '@material-ui/icons/BookmarkRounded';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import TelegramIcon from '@material-ui/icons/Telegram';
 
+import Dots from './Menu'
+
 import {useSelector} from 'react-redux'
 import moment from 'moment';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+
+import { useDispatch } from 'react-redux';
+import {deletePost} from '../../actions/posts'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -119,21 +124,26 @@ const useStyles = makeStyles((theme) => ({
 const Feed = () => {
     const posts = useSelector((state) => state.posts)
     const classes = useStyles();
+    const [feed, setFeed] = React.useState(posts)
     const [feedLoading, setFeedLoading] = React.useState(true)
     const [storyLoading, setStoryLoading] = React.useState(false)
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const dispatch = useDispatch()
 
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
   
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
 
+    // useEffect(() => {
+    //   // setFeedLoading(true)
+    //   posts.sort(function(a,b){
+    //     return new Date(b.createdAt) - new Date(a.createdAt)
+    //   })
+    //   setFeed(posts)
+    //   setFeedLoading(false)
+    // }, [posts])
 
-    console.log(posts)
+    
+
+    // console.log(posts)
     const n = 20;
 
 
@@ -176,7 +186,9 @@ const Feed = () => {
             </div>
           </Paper>
           
-            {!posts.length? 
+            {
+            !posts.length? 
+            // feedLoading? 
             <div style={{display:'flex',flexDirection:'row', justifyContent:'center', marginTop:'50px', marginBottom:'10px', height:'', alignItems:'center'}}>
 
             <CircularProgress 
@@ -185,18 +197,23 @@ const Feed = () => {
             : null}
         </Grid>
         {posts.map((post) => (
-          <Grid key={post.id}item xs={12} sm={12} md={6}>
+          
+          <Grid key={post._id}item xs={12} sm={12} md={6}>
+        
+            {/* {console.log(post._id)} */}
             <Card className={classes.card}>
+          
+          
             <CardHeader
+                // onClick={()=>{console.log(post._id)}}
                 avatar={
-                  <Avatar alt="P" src="" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}>
+                  <Avatar alt="P" src="pig.webp" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}>
                     P
                   </Avatar>
                 }
                 action={
-                  <IconButton aria-label="settings" style={{color:'white'}} onClick={handleClick}>
-                    <MoreHorizIcon />
-                  </IconButton>
+                  <Dots id={post._id} />
+                  
                 }
                 title={
                   <div style={{fontFamily:'Roobert', fontWeight:'bold', color:'white'}}>
@@ -208,7 +225,8 @@ const Feed = () => {
                     Singapore
                   </div>
                 }
-      />
+              />
+
               <CardMedia className={classes.media} image={post.selectedFile} />
               <CardContent style={{paddingLeft:'20px', paddingRight:'20px', color:'white', fontFamily:'Roobert'}}>
               <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'5px'}}>
@@ -227,7 +245,6 @@ const Feed = () => {
               <div style={{display:'flex', flexDirection:'column'}}>
               <Typography variant="p" style={{fontFamily:"Roobert", color:'white', height:'40px', overflow:'scroll'}}>
               {post.caption}
-              {/* {moment(post.createdAt).fromNow()} */}
               </Typography>
               <Typography variant="p" style={{fontFamily:"Roobert", color:'lightgrey'}}>
               
@@ -239,22 +256,11 @@ const Feed = () => {
               </CardContent>
               
             </Card>
+            
           </Grid>
         ))}
 
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-        color="primary"
-        className={classes.menu}
-      >
-        <MenuItem style={{fontFamily:'Roobert'}} onClick={handleClose}>Delete</MenuItem>
-        <MenuItem style={{fontFamily:'Roobert'}} onClick={handleClose}>Edit</MenuItem>
-        <MenuItem style={{fontFamily:'Roobert'}} onClick={handleClose}>Share</MenuItem>
-      </Menu>
+      
       </Grid>
     </div>
   );

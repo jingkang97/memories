@@ -154,7 +154,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop:'10px',
     // padding: "20px",
     // paddingRight:'100px',
-    backgroundColor:'black',
+    // backgroundColor:'#1D1E1F',
+    backgroundColor:'#181818',
+    // backgroundColor:'black',
     color:'white'
   },
   divider: {
