@@ -8,11 +8,18 @@ const postSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    }
+    // createdAt: {
+    //     type: Date,
+    //     default: Date.now()
+    // }
 })
+
+postSchema.set('timestamps', 
+// {
+    // createdAt: "createdAt",
+
+// }
+true);
 
 const PostMessage = mongoose.model('PostMessage', postSchema)
 

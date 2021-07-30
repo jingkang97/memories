@@ -8,6 +8,11 @@ import {deletePost} from '../../actions/posts'
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
+import DeleteOutlineRoundedIcon from '@material-ui/icons/DeleteOutlineRounded';
+import EditRoundedIcon from '@material-ui/icons/EditRounded';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
+
 const useStyles = makeStyles((theme) => ({
     menu: {
         "& .MuiPaper-root": {
@@ -55,9 +60,9 @@ const classes = useStyles();
         className={classes.menu}
 
       >
-        <MenuItem onClick={handleDelete}>Delete</MenuItem>
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Share</MenuItem>
+        <MenuItem onClick={handleDelete}><div style={{display:'flex', flexDirection:'row', alignItems:'center', color:'red'}}><DeleteOutlineRoundedIcon style={{marginRight:'5px'}}/> Delete</div> </MenuItem>
+        <MenuItem onClick={handleClose}><div style={{display:'flex', flexDirection:'row', alignItems:'center', color:'white'}}><EditOutlinedIcon style={{marginRight:'5px'}}/> Edit</div></MenuItem>
+        <MenuItem onClick={handleClose}><div style={{display:'flex', flexDirection:'row', alignItems:'center', color:'white'}}><LinkRoundedIcon style={{marginRight:'5px'}}/> Share</div></MenuItem>
       </Menu>
     </div>
   );

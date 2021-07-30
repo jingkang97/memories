@@ -130,8 +130,6 @@ const Feed = () => {
 
     const dispatch = useDispatch()
 
-  
-
     // useEffect(() => {
     //   // setFeedLoading(true)
     //   posts.sort(function(a,b){
@@ -142,7 +140,6 @@ const Feed = () => {
     // }, [posts])
 
     
-
     // console.log(posts)
     const n = 20;
 
@@ -196,11 +193,12 @@ const Feed = () => {
             </div>
             : null}
         </Grid>
-        {posts.map((post) => (
+        {posts.sort((a,b) => {return new Date(b.createdAt) - new Date(a.createdAt)})
+        .map((post) => (
           
           <Grid key={post._id}item xs={12} sm={12} md={6}>
         
-            {/* {console.log(post._id)} */}
+            {console.log(post.createdAt, post._id)}
             <Card className={classes.card}>
           
           
