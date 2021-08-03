@@ -31,7 +31,7 @@ import BookmarkRoundedIcon from '@material-ui/icons/BookmarkRounded';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import TelegramIcon from '@material-ui/icons/Telegram';
 
-import Dots from './Menu'
+import More from './Menu'
 
 import {useSelector} from 'react-redux'
 import moment from 'moment';
@@ -210,7 +210,7 @@ const Feed = () => {
                   </Avatar>
                 }
                 action={
-                  <Dots id={post._id} />
+                  <More post={post} />
                   
                 }
                 title={
