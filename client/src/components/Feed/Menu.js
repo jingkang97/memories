@@ -106,8 +106,9 @@ const [postData, setPostData] = useState({
   };
 
   const handleSubmit = (e) => {
-    setAnchorEl(null);
+    e.preventDefault();
     dispatch(updatePost(post._id, postData))
+    setOpen(false);
   }
   
 
