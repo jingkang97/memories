@@ -42,6 +42,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch } from 'react-redux';
 import {deletePost} from '../../actions/posts'
 
+import {likePost} from '../../actions/posts'
+
 const useStyles = makeStyles((theme) => ({
     root: {
       // flexGrow: 1,
@@ -103,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
     card: {
       minWidth:'100px',
       // maxWidth:'300px',
-      height:'500px',
+      height:'530px',
         // padding: theme.spacing(2),
         // textAlign: 'center',
         backgroundColor:'#414241',
@@ -118,7 +120,8 @@ const useStyles = makeStyles((theme) => ({
           backgroundColor: "#333333",
           color:'white',
         }
-      }
+      },
+      
   }));
 
 const Feed = () => {
@@ -229,7 +232,7 @@ const Feed = () => {
               <CardContent style={{paddingLeft:'20px', paddingRight:'20px', color:'white', fontFamily:'Roobert'}}>
               <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'5px'}}>
                 <div >
-                  <FavoriteBorderOutlinedIcon style={{marginRight:'10px', cursor:'pointer'}}/>
+                  <FavoriteBorderOutlinedIcon style={{marginRight:'10px', cursor:'pointer'}} onClick={() => dispatch(likePost(post._id))}/>
                 
                   <ChatBubbleOutlineOutlinedIcon style={{cursor:'pointer'}} />
                   
@@ -241,10 +244,15 @@ const Feed = () => {
               </div>
               
               <div style={{display:'flex', flexDirection:'column'}}>
-              <Typography variant="p" style={{fontFamily:"Roobert", color:'white', height:'40px', overflow:'scroll'}}>
+              <Typography variant="p" style={{fontFamily:"Roobert", color:'white', height:'50px', overflow:'scroll'}}>
               {post.caption}
+
+              
               </Typography>
               <Typography variant="p" style={{fontFamily:"Roobert", color:'lightgrey'}}>
+              <div>
+              {post.updatedAt != post.createdAt? 'edited ' : null}
+              </div>
               
               {moment(post.createdAt).fromNow()}
               </Typography>
