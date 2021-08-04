@@ -32,6 +32,7 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import TelegramIcon from '@material-ui/icons/Telegram';
 
 import More from './Menu'
+import Like from './Like'
 
 import {useSelector} from 'react-redux'
 import moment from 'moment';
@@ -232,7 +233,8 @@ const Feed = () => {
               <CardContent style={{paddingLeft:'20px', paddingRight:'20px', color:'white', fontFamily:'Roobert'}}>
               <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'5px'}}>
                 <div >
-                  <FavoriteBorderOutlinedIcon style={{marginRight:'10px', cursor:'pointer'}} onClick={() => dispatch(likePost(post._id))}/>
+                  <Like post={post}/>
+                  {/* <FavoriteBorderOutlinedIcon style={{marginRight:'10px', cursor:'pointer'}} onClick={() => dispatch(likePost(post._id))}/> */}
                 
                   <ChatBubbleOutlineOutlinedIcon style={{cursor:'pointer'}} />
                   
