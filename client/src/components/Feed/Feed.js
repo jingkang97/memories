@@ -41,9 +41,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import { useDispatch } from 'react-redux';
-import {deletePost} from '../../actions/posts'
+import {deletePost, likePost} from '../../actions/posts'
 
-import {likePost} from '../../actions/posts'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -236,14 +235,14 @@ const Feed = () => {
                   <Like post={post}/>
                   {/* <FavoriteBorderOutlinedIcon style={{marginRight:'10px', cursor:'pointer'}} onClick={() => dispatch(likePost(post._id))}/> */}
                 
-                  <ChatBubbleOutlineOutlinedIcon style={{cursor:'pointer'}} />
+                  {/* <ChatBubbleOutlineOutlinedIcon style={{cursor:'pointer'}} /> */}
                   
                 </div>
                 <BookmarkBorderIcon style={{cursor:'pointer'}}/>
               </div>
-              <div style={{display:'flex', flexDirection:'row', marginBottom:'5px'}}>
+              {/* <div style={{display:'flex', flexDirection:'row', marginBottom:'5px'}}>
                 Liked by <div style={{fontWeight:'bold', marginLeft:'5px'}}>{post.likeCount}</div>
-              </div>
+              </div> */}
               
               <div style={{display:'flex', flexDirection:'column'}}>
               <Typography variant="p" style={{fontFamily:"Roobert", color:'white', height:'50px', overflow:'scroll'}}>

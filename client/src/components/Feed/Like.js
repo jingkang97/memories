@@ -29,20 +29,20 @@ const Like = ({post}) => {
     return ( 
         <div style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'10px'}}>
             {count ? 
-            <FavoriteOutlinedIcon className="like" style={{color:'red',marginRight:'10px', cursor:'pointer'}} 
+            <FavoriteOutlinedIcon className="like" style={{color:'red',marginRight:'5px', cursor:'pointer'}} 
             onClick={handleClick}
 
             // onClick={()=>{console.log('like!' + post._id)}}
             />
             : 
-            <FavoriteBorderOutlinedIcon className="like" style={{marginRight:'10px', cursor:'pointer'}} 
+            <FavoriteBorderOutlinedIcon className="like" style={{marginRight:'5px', cursor:'pointer'}} 
             onClick={handleClick}
 
             // onClick={()=>{console.log('like!' + post._id)}}
             />
             
             }
-            <div>
+            <div style={{fontSize:'15px'}}>
             {count}
             </div>
             

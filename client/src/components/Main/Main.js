@@ -73,7 +73,7 @@ const customTheme = createTheme({
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    backgroundColor:'black',
+    backgroundColor:'#181818',
     // width:'100%',
     minWidth:'100vw',
     minHeight:'100vh',
@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerOpen: {
     backgroundColor:'#1F1F23',
-    borderColor:'black',
+    borderColor:'#181818',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -127,6 +127,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerClose: {
     backgroundColor:'#1F1F23',
+    borderColor:'#181818',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -410,7 +411,7 @@ function MiniDrawer() {
         </div>
         
         <div style={{marginTop:'-15px', width:'205px',color:'white', display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
-        <div style={{backgroundColor:'black', borderRadius:'5px'}}> 
+        <div style={{backgroundColor:'#181818', borderRadius:'5px'}}> 
         <IconButton size="medium" style={{ height:'30px', width:'30px',position:'relative',color:'white'}}
         
         onClick={handleDrawerClose}>

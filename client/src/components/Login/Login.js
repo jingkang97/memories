@@ -20,6 +20,10 @@ import {Route, useHistory, useLocation} from 'react-router-dom'
 import './styles.css'
 import transitions from '@material-ui/core/styles/transitions';
 
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import { IconButton } from '@material-ui/core';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "white",
@@ -108,6 +112,14 @@ const Login = () => {
     const history = useHistory()
     const [auth, setAuth] = React.useState('false')
     const [value, setValue] = React.useState('Login');
+
+    const [username, setUserName] = React.useState('')
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
+
+    const [typeLogin, setTypeLogin] = React.useState('password')
+    const [typeRegister, setTypeRegister] = React.useState('password')
+
     const [loading, setLoading] = React.useState(false)
 
     const handleClick = () => {
@@ -117,6 +129,27 @@ const Login = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleUserName = () => {
+
+  }
+
+  const handleShowLoginPassword = () => {
+    if(typeLogin == "password"){
+      setTypeLogin("")
+    }else{
+      setTypeLogin("password")
+    }
+  }
+
+  const handleShowRegisterPassword = () => {
+    if(typeRegister == "password"){
+      setTypeRegister("")
+    }else{
+      setTypeRegister("password")
+    }
+  }
+
     return ( 
         <div style={{margin:'0', width:'100vw',color:'white', backgroundColor:'#333333', height:'100vh', display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
             <Card 
@@ -153,6 +186,8 @@ const Login = () => {
           <TextField 
           fullWidth
           // label="username"
+          onChange={handleUserName}
+          autoFocus
           variant="outlined"
           margin="dense"
           placeholder="username ..."
@@ -169,7 +204,7 @@ const Login = () => {
            
           />
           <TextField 
-          type="password"
+          type={typeLogin}
           fullWidth
           variant="outlined"
           margin="dense"
@@ -178,12 +213,19 @@ const Login = () => {
             className: classes.input,
             classes:{notchedOutline:classes.noBorder},
             disableUnderline: true,
-          
             startAdornment: (
               <InputAdornment position="start">
                 <LockRoundedIcon style={{fontSize:'15px', color:'#898989'}}/>
               </InputAdornment>
             ),
+            endAdornment:(
+              <IconButton onClick={handleShowLoginPassword} disableRipple
+              style={{ backgroundColor: 'transparent' }} 
+
+              >
+                {typeLogin == 'password' ? <VisibilityIcon style={{fontSize:'15px', color:'#898989'}}/> : <VisibilityOffIcon style={{fontSize:'15px', color:'#898989'}}/>}
+              </IconButton>
+            )
           }}
           />
         </div>
@@ -239,7 +281,7 @@ const Login = () => {
           }}
           />
           <TextField 
-          type="password"
+          type={typeRegister}
           fullWidth
           // label="username"
           variant="outlined"
@@ -254,6 +296,14 @@ const Login = () => {
                 <LockRoundedIcon style={{fontSize:'15px', color:'#898989'}}/>
               </InputAdornment>
             ),
+            endAdornment:(
+              <IconButton onClick={handleShowRegisterPassword} disableRipple
+              style={{ backgroundColor: 'transparent' }} 
+
+              >
+                {typeRegister == 'password' ? <VisibilityIcon style={{fontSize:'15px', color:'#898989'}}/> : <VisibilityOffIcon style={{fontSize:'15px', color:'#898989'}}/>}
+              </IconButton>
+            )
           }}
           />
           
