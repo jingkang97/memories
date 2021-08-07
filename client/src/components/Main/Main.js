@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -41,7 +41,7 @@ import Add from '../Add/Add';
 
 import Logo from '../Logo/Logo';
 import './styles.css'
-import { Button } from '@material-ui/core';
+import { Avatar, Button } from '@material-ui/core';
 
 import {
   createTheme,
@@ -223,6 +223,13 @@ function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')))
+
+  useEffect(()=>{
+    const token = user?.token;
+
+    setUser(JSON.parse(localStorage.getItem('profile')))
+  },[])
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -266,6 +273,12 @@ function MiniDrawer() {
          
 
           <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+          <Avatar src={user?.result.imageUrl} alt={user?.result.name} style={{marginRight:'10px', height:'30px', width:'30px'}}>
+            {user?.result.name.charAt(0)}
+          </Avatar>
+          {/* <div style={{marginRight:'10px', fontFamily:'Roobert'}}>
+            {user.result.givenName}
+          </div> */}
           <Add />
             
           </div>

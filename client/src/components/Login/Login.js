@@ -24,6 +24,13 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { IconButton } from '@material-ui/core';
 
+import {GoogleLogin} from 'react-google-login'
+import {useDispatch} from 'react-redux';
+
+import Icon from './Icon'
+
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "white",
@@ -93,16 +100,51 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   register:{
-    height:'350px', width:'300px', backgroundColor:'#414141',
+    height:'400px', width:'300px', backgroundColor:'#414141',
     transitions:'2s '
   },
   login:{
-    height:'350px', width:'300px', backgroundColor:'#414141',
+    height:'400px', width:'300px', backgroundColor:'#414141',
     transitions:'height 2s'
 
   },
   colorPrimary: {
     background: '#9047ff'
+  },
+  mainButton:{
+    '&:hover': {
+      backgroundPosition:'0 -40px',
+      backgroundSize: '100% 100px',
+      background: 'linear-gradient(45deg, #FE6B8B 40%, #9047ff 90%)',
+      // background: 'pink',
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      transition: "background 0.5s ease-in-out",
+    },
+    backgroundSize: '100% 100px',
+    backgroundPosition: '0 0px',
+    transition: "background 0.3s ease-in-out, box-shadow 0.3s ease-in-out ",
+    background: 'linear-gradient(45deg, #FE6B8B 40%, #9047ff 90%)',
+    // background: 'linear-gradient(45deg, #FE6B8B 5%, #FF8E53 10%, #9047ff 90%)',
+    border: 0,
+    // borderRadius: 7,
+    color: 'white',
+    textTransform: 'none',
+    fontFamily:'Roobert',
+    fontWeight:'bold', 
+    fontSize:'10px', 
+    borderRadius:'20px', 
+    width:'100%',
+    marginBottom:'10px'
+  },
+  googleLogin:{
+    color:'#757575',
+    backgroundColor:'white',
+    textTransform: 'None',
+    borderRadius:'20px', 
+    fontFamily:'Roobert',
+    fontWeight:'bold', 
+    fontSize:'10px', 
+
   }
 }));
 
@@ -122,6 +164,8 @@ const Login = () => {
 
     const [loading, setLoading] = React.useState(false)
 
+    const dispatch = useDispatch()
+
     const handleClick = () => {
       history.push('/feed')
     }
@@ -130,8 +174,16 @@ const Login = () => {
     setValue(newValue);
   };
 
-  const handleUserName = () => {
+  const handleUserName = (e) => {
+    setUserName(e.target.value)
+  }
 
+  const handlePassword = (e) => {
+    setPassword(e.target.value)
+  }
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
   }
 
   const handleShowLoginPassword = () => {
@@ -150,6 +202,25 @@ const Login = () => {
     }
   }
 
+  const googleSuccess = async (res) => {
+    // console.log(res)
+    // optional chaining
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    // console.log(result, token)
+
+    try {
+      dispatch({type:'AUTH', data: {result, token}})
+      history.push('/feed')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const googleFailure = (error) => {
+    console.log(error)
+    console.log("Google Sign In was unsuccessful. Try again Later")
+  }
     return ( 
         <div style={{margin:'0', width:'100vw',color:'white', backgroundColor:'#333333', height:'100vh', display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
             <Card 
@@ -205,6 +276,7 @@ const Login = () => {
           />
           <TextField 
           type={typeLogin}
+          onChange={handlePassword}
           fullWidth
           variant="outlined"
           margin="dense"
@@ -229,12 +301,37 @@ const Login = () => {
           }}
           />
         </div>
-        <div style={{width:'inherit', paddingLeft:'10px', paddingRight:'10px', display:'flex', flexDirection:'row', justifyContent:'center', }}>
+        <div style={{width:'inherit', paddingLeft:'10px', paddingRight:'10px', display:'flex', flexDirection:'column', justifyContent:'center', }}>
         <Button 
         onClick={handleClick}
-        variant="contained" style={{backgroundColor:'#9047ff', color:'white', textTransform:'none', fontFamily:'Roobert', fontWeight:'bold', fontSize:'10px', borderRadius:'20px', width:'100%'}}>Login</Button>
+        variant="contained" 
+        className={classes.mainButton}
+        >
+          
+          Login</Button>
+
+          <GoogleLogin 
+            clientId="741324102509-jhqfshg5scke6cdregn576vdpi6ml0pv.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <Button
+              startIcon={<img src="Google__G__Logo.svg"
+              style={{height:'10px', width:'10px'}}
+              />}
+              // {<Icon />}
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+              variant="contained"
+              className={classes.googleLogin}
+              >Login With Google</Button>
+            )}
+            // style={{borderRadius:'50px'}}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
+          />
         
         </div>
+        
         <div className={classes.Link}>
           <a href="#" className={classes.Link}>
           Forget password?
@@ -249,6 +346,7 @@ const Login = () => {
           <TextField 
           fullWidth
           // label="username"
+          onChange={handleUserName}
           variant="outlined"
           margin="dense"
           placeholder="username ..."
@@ -266,6 +364,7 @@ const Login = () => {
           <TextField 
           fullWidth
           // label="username"
+          onChange={handleEmail}
           variant="outlined"
           margin="dense"
           placeholder="email ..."
@@ -282,6 +381,7 @@ const Login = () => {
           />
           <TextField 
           type={typeRegister}
+          onChange={handlePassword}
           fullWidth
           // label="username"
           variant="outlined"
@@ -311,7 +411,10 @@ const Login = () => {
         <div style={{width:'inherit', paddingLeft:'10px', paddingRight:'10px', display:'flex', flexDirection:'row', justifyContent:'center', }}>
         <Button 
         onClick={handleClick}
-        variant="contained" style={{backgroundColor:'#9047ff', color:'white', textTransform:'none', fontFamily:'Roobert', fontWeight:'bold', fontSize:'10px', borderRadius:'20px', width:'100%'}}>Register</Button>
+        variant="contained" 
+        className={classes.mainButton}
+        // style={{backgroundColor:'#9047ff', color:'white', textTransform:'none', fontFamily:'Roobert', fontWeight:'bold', fontSize:'10px', borderRadius:'20px', width:'100%'}}
+        >Register</Button>
         
         </div>
         
