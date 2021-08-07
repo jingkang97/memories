@@ -286,7 +286,11 @@ function MiniDrawer() {
          
 
           <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-          <Avatar src={user?.result.imageUrl} alt={user?.result.name} style={{marginRight:'10px', height:'30px', width:'30px'}}>
+          <Avatar 
+          style={{marginRight:'10px', height:'30px', width:'30px',backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}} 
+          src={user?.result.imageUrl} 
+          alt={user?.result.name} 
+          >
             {user?.result.name.charAt(0)}
           </Avatar>
           {/* <div style={{marginRight:'10px', fontFamily:'Roobert'}}>
