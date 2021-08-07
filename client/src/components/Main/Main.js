@@ -43,6 +43,8 @@ import Logo from '../Logo/Logo';
 import './styles.css'
 import { Avatar, Button } from '@material-ui/core';
 
+import { useDispatch } from 'react-redux';
+
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
@@ -225,11 +227,20 @@ function MiniDrawer() {
 
   const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')))
 
+  const dispatch = useDispatch()
+
+
   useEffect(()=>{
     const token = user?.token;
 
     setUser(JSON.parse(localStorage.getItem('profile')))
   },[])
+
+  const logout = () => {
+    dispatch({type: 'LOGOUT'})
+    setUser(null)
+    history.push('/login')
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -238,6 +249,8 @@ function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+
 
   return (
     <div className={classes.root}>
@@ -434,7 +447,7 @@ function MiniDrawer() {
         
         </div>
         
-        <ListItem button onClick={()=>{history.push('/login')}}>
+        <ListItem button onClick={logout}>
               <ListItemIcon>
                 <ExitToAppRoundedIcon style={{marginLeft:'7px',color:'grey'}}/> 
                 </ListItemIcon>
