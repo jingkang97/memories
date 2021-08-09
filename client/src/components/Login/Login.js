@@ -27,9 +27,7 @@ import { IconButton } from '@material-ui/core';
 import {GoogleLogin} from 'react-google-login'
 import {useDispatch} from 'react-redux';
 
-import Icon from './Icon'
-
-
+import {signin, signup} from '../../actions/auth'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -152,15 +150,19 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
     const classes = useStyles();
     const history = useHistory()
-    const [auth, setAuth] = React.useState('false')
-    const [value, setValue] = React.useState('Login');
 
-    const [username, setUserName] = React.useState('')
-    const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const initialRegisterState = {username: '', email: '', password: '', confirmPassword: ''}
+    const initialLoginState = {username: '', password: ''}
+
+    const [registerFormData, setRegisterFormData] = React.useState(initialRegisterState)
+    const [loginFormData, setLoginFormData] = React.useState(initialLoginState)
+
+    const [value, setValue] = React.useState('Login');
 
     const [typeLogin, setTypeLogin] = React.useState('password')
     const [typeRegister, setTypeRegister] = React.useState('password')
+    const [typeRegisterConfirm, setTypeRegisterConfirm] = React.useState('password')
+
 
     const [loading, setLoading] = React.useState(false)
 
@@ -174,16 +176,47 @@ const Login = () => {
     setValue(newValue);
   };
 
-  const handleUserName = (e) => {
-    setUserName(e.target.value)
+  const handleRegisterFormChange = (e) => {
+    setRegisterFormData({...registerFormData, [e.target.name]: e.target.value})
   }
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value)
+  const handleLoginFormChange = (e) => {
+    setLoginFormData({...loginFormData, [e.target.name]: e.target.value})
   }
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value)
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   if(value=="Register"){
+  //     if(formData.password != formData.confirmPassword){
+  //       alert('Passwords must be the same!')
+  //     }
+  //     console.log('register')
+  //   }else{
+  //     console.log('login')
+  //   }
+    
+  //   console.log(formData)
+  // }
+
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault()
+      if(registerFormData.password != registerFormData.confirmPassword){
+        alert('Passwords must be the same!')
+      }else{
+        console.log('register')
+        console.log(registerFormData)
+        dispatch(signup(registerFormData, history))
+      }
+  
+  }
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault()
+     
+    console.log('login')
+    console.log(loginFormData)
+    dispatch(signin(loginFormData, history))
+
   }
 
   const handleShowLoginPassword = () => {
@@ -199,6 +232,14 @@ const Login = () => {
       setTypeRegister("")
     }else{
       setTypeRegister("password")
+    }
+  }
+
+  const handleShowRegisterConfirmPassword = () => {
+    if(typeRegisterConfirm == "password"){
+      setTypeRegisterConfirm("")
+    }else{
+      setTypeRegisterConfirm("password")
     }
   }
 
@@ -252,12 +293,17 @@ const Login = () => {
         <Tab value="Register"className={classes.tabStyle} label="Register" />
       </Tabs>
       <div role="tabpanel" hidden={value !== "Login"}>
+        <form onSubmit={handleLoginSubmit}>
+
+
         <div style={{height:'100%', padding:'10px', marginTop:'5px', marginBottom:'0px'}}>
           
           <TextField 
           fullWidth
           // label="username"
-          onChange={handleUserName}
+          // onChange={handleUserName}
+          name="username"
+          onChange={handleLoginFormChange}
           autoFocus
           variant="outlined"
           margin="dense"
@@ -276,7 +322,9 @@ const Login = () => {
           />
           <TextField 
           type={typeLogin}
-          onChange={handlePassword}
+          // onChange={handlePassword}
+          name="password"
+          onChange={handleLoginFormChange}
           fullWidth
           variant="outlined"
           margin="dense"
@@ -303,7 +351,10 @@ const Login = () => {
         </div>
         <div style={{width:'inherit', paddingLeft:'10px', paddingRight:'10px', display:'flex', flexDirection:'column', justifyContent:'center', }}>
         <Button 
-        onClick={handleClick}
+        type="submit"
+        // onClick={handleClick}
+        // onClick={handleLoginSubmit}
+
         variant="contained" 
         className={classes.mainButton}
         >
@@ -338,15 +389,20 @@ const Login = () => {
           </a>
             
         </div>
+        </form>
       </div>
 
       <div role="tabpanel" hidden={value !== "Register"}>
+      <form onSubmit={handleRegisterSubmit}>
         <div style={{height:'100%', padding:'10px', marginTop:'5px', marginBottom:'0px'}}>
           
+
           <TextField 
           fullWidth
           // label="username"
-          onChange={handleUserName}
+          // onChange={handleUserName}
+          name="username"
+          onChange={handleRegisterFormChange}
           variant="outlined"
           margin="dense"
           placeholder="username ..."
@@ -364,7 +420,9 @@ const Login = () => {
           <TextField 
           fullWidth
           // label="username"
-          onChange={handleEmail}
+          // onChange={handleEmail}
+          name="email"
+          onChange={handleRegisterFormChange}
           variant="outlined"
           margin="dense"
           placeholder="email ..."
@@ -381,7 +439,9 @@ const Login = () => {
           />
           <TextField 
           type={typeRegister}
-          onChange={handlePassword}
+          name="password"
+          onChange={handleRegisterFormChange}
+          // onChange={handlePassword}
           fullWidth
           // label="username"
           variant="outlined"
@@ -406,18 +466,51 @@ const Login = () => {
             )
           }}
           />
+
+
+        <TextField 
+          type={typeRegisterConfirm}
+          name="confirmPassword"
+          onChange={handleRegisterFormChange}
+          // onChange={handlePassword}
+          fullWidth
+          // label="username"
+          variant="outlined"
+          margin="dense"
+          placeholder="confirm password ..."
+          InputProps={{ 
+            className: classes.input,
+            classes:{notchedOutline:classes.noBorder},
+            disableUnderline: true,
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockRoundedIcon style={{fontSize:'15px', color:'#898989'}}/>
+              </InputAdornment>
+            ),
+            endAdornment:(
+              <IconButton onClick={handleShowRegisterConfirmPassword} disableRipple
+              style={{ backgroundColor: 'transparent' }} 
+
+              >
+                {typeRegisterConfirm == 'password' ? <VisibilityIcon style={{fontSize:'15px', color:'#898989'}}/> : <VisibilityOffIcon style={{fontSize:'15px', color:'#898989'}}/>}
+              </IconButton>
+            )
+          }}
+          />
           
         </div>
         <div style={{width:'inherit', paddingLeft:'10px', paddingRight:'10px', display:'flex', flexDirection:'row', justifyContent:'center', }}>
         <Button 
-        onClick={handleClick}
+        type="submit"
+        // onClick={handleRegisterSubmit}
         variant="contained" 
         className={classes.mainButton}
         // style={{backgroundColor:'#9047ff', color:'white', textTransform:'none', fontFamily:'Roobert', fontWeight:'bold', fontSize:'10px', borderRadius:'20px', width:'100%'}}
         >Register</Button>
         
         </div>
-        
+        </form>
+
       </div>
       
             </Card>
