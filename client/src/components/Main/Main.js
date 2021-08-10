@@ -291,7 +291,10 @@ function MiniDrawer() {
           src={user?.result.imageUrl} 
           alt={user?.result.name} 
           >
-            {user?.result.name.charAt(0)}
+            <div style={{marginTop:'-3px'}}>
+            {user?.result.username.charAt(0).toUpperCase()}
+            </div>
+
           </Avatar>
           {/* <div style={{marginRight:'10px', fontFamily:'Roobert'}}>
             {user.result.givenName}
