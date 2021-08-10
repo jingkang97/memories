@@ -289,11 +289,11 @@ function MiniDrawer() {
           <Avatar 
           style={{marginRight:'10px', height:'30px', width:'30px',backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}} 
           src={user?.result.imageUrl} 
-          alt={user?.result.name} 
+          // alt={user?.result.name} 
           >
-            <div style={{marginTop:'-3px'}}>
+            {/* <div style={{marginTop:'-3px'}}>
             {user?.result.username.charAt(0).toUpperCase()}
-            </div>
+            </div> */}
 
           </Avatar>
           {/* <div style={{marginRight:'10px', fontFamily:'Roobert'}}>
