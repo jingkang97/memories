@@ -106,6 +106,7 @@ const Add = () => {
     //     setPostData(event.target.value);
     // };
 
+    const user = JSON.parse(localStorage.getItem('profile'));
     const handleClose = () => {
         setPostData({caption:'', selectedFile:''})
         setOpen(false);
@@ -118,11 +119,18 @@ const Add = () => {
       e.preventDefault();
       setPostData({caption:'', selectedFile:''})
       setOpen(false);
-      dispatch(createPost(postData))
+      // dispatch(createPost(postData))
+      dispatch(createPost({...postData, username: user?.result?.username}))
+
       console.log('submit')
   };
+
+  // if(!user?.result?.username){
+    
+  // }
     return ( 
         <div className="body">
+         
             <Button 
             className={classes.addButton} 
             // className="addButton"
@@ -137,96 +145,114 @@ const Add = () => {
             </div>
            
             </Button>
-
+      {user?.result?.username ? 
       <Backdrop className={classes.backdrop} open={open} >
 
+      <Card className={classes.card}>
+     
+
+          <div style={{position:'absolute', right:'5px', top:'5px'}}>
+              <IconButton size="small" onClick={handleClose}>
+                  <CloseRoundedIcon style={{color:'grey'}}/>
+              </IconButton>
+          </div>
+          <div style={{fontFamily:'Roobert', fontWeight:'bold', fontSize:'20px', display:'flex', flexDirection:'row', justifyContent:'center', marginBottom:'10px'}}>
+              Create Post
+          </div>
+          <Divider classes={{root: classes.divider}}/>
+          <form style={{width:'100%'}} onSubmit={handleSubmit}>
+
+          <div style={{marginTop:'10px'}}>
+              <div style={{display:'flex', flexDirection:'row'}}>
+              <Avatar alt="P" src="" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}/>
+              <div style={{marginLeft:'10px'}}>
+                  User
+              </div>
+              </div>
+
+          <div style={{height:'90px', overflow:'scroll', marginTop:'10px'}}>
+          <TextField 
+          style={{marginBottom:'20px', width:'100%', color:'white'}}
+          multiline
+          value={postData.caption}
+          // onChange={handleChange}
+          onChange={(e) => setPostData({...postData, caption: e.target.value})}
+          rows={4}
+          InputProps={{ 
+              className: classes.input,
+              disableUnderline: true }}
+          placeholder="What's on your mind?"
+
+          // label="Required"
+          />
+          </div>
+          
+          <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', border:'1px solid grey', marginBottom:'20px',height:'150px', borderRadius:'10px', overflow:'scroll'}}>
+        
+
+         
+        {postData.selectedFile ? 
+        <div>
+        <img src={postData.selectedFile} style={{height:'300px', width:'100%'}}/>
+        </div> 
+        : 
+        <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+        <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        style={{backgroundColor:'', marginBottom:'10px', height:'90px', width:'90px', alignSelf:'center'}}
+        component="label"
+         // onClick={handleDrawerOpen}
+         >
+        <PublishRoundedIcon style={{fontSize:'50px', color:'grey'}}/>
+         <label className="file-upload__icon">
+         <FileBase 
+          // className={classes.fileInput}
+          type="file" 
+          multiple={false} 
+          onDone={({base64}) => setPostData({...postData, selectedFile: base64})} />
+          
+          </label>
+          
+         {/* <input 
+           type="file" 
+           hidden/> */}
+        </IconButton>
+        <div>
+        Click to Upload Image!
+        </div>
+        </div>
+        }
+          </div>
+        </div>
+            
+        
+          {/* <div style={{marginBottom:'1px', position:'absolute', display:'flex', flexDirection:'row', bottom:'10px', right:'10px', justifyContent:'center'}}> */}
+          <Button variant="contained" type="submit" className={classes.postButton} >Post!</Button>
+          {/* <Button variant="contained" className={classes.cancelButton} onClick={handleClose}>Cancel</Button> */}
+            </form>
+          {/* </div> */}
+            </Card>
+      {/* <CircularProgress color="inherit" /> */}
+    </Backdrop>
+      
+      : 
+      
+      <Backdrop className={classes.backdrop} open={open} >
         <Card className={classes.card}>
-       
-
-            <div style={{position:'absolute', right:'5px', top:'5px'}}>
-                <IconButton size="small" onClick={handleClose}>
-                    <CloseRoundedIcon style={{color:'grey'}}/>
-                </IconButton>
-            </div>
-            <div style={{fontFamily:'Roobert', fontWeight:'bold', fontSize:'20px', display:'flex', flexDirection:'row', justifyContent:'center', marginBottom:'10px'}}>
-                Create Post
-            </div>
-            <Divider classes={{root: classes.divider}}/>
-            <form style={{width:'100%'}} onSubmit={handleSubmit}>
-
-            <div style={{marginTop:'10px'}}>
-                <div style={{display:'flex', flexDirection:'row'}}>
-                <Avatar alt="P" src="" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}/>
-                <div style={{marginLeft:'10px'}}>
-                    User
-                </div>
-                </div>
-
-            <div style={{height:'90px', overflow:'scroll', marginTop:'10px'}}>
-            <TextField 
-            style={{marginBottom:'20px', width:'100%', color:'white'}}
-            multiline
-            value={postData.caption}
-            // onChange={handleChange}
-            onChange={(e) => setPostData({...postData, caption: e.target.value})}
-            rows={4}
-            InputProps={{ 
-                className: classes.input,
-                disableUnderline: true }}
-            placeholder="What's on your mind?"
-
-            // label="Required"
-            />
-            </div>
-            
-            <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', border:'1px solid grey', marginBottom:'20px',height:'150px', borderRadius:'10px', overflow:'scroll'}}>
+        <div style={{position:'absolute', right:'5px', top:'5px'}}>
+              <IconButton size="small" onClick={handleClose}>
+                  <CloseRoundedIcon style={{color:'grey'}}/>
+              </IconButton>
+          </div>
+          <div style={{height: '420px', width:'100%', display:'flex', flexDirection:'center', justifyContent: 'center', alignItems: 'center'}}>
+            Please sign in to create your own memories and like other's memories
+          </div>
           
-
-           
-          {postData.selectedFile ? 
-          <div>
-          <img src={postData.selectedFile} style={{height:'300px', width:'100%'}}/>
-          </div> 
-          : 
-          <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-          <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          style={{backgroundColor:'', marginBottom:'10px', height:'90px', width:'90px', alignSelf:'center'}}
-          component="label"
-           // onClick={handleDrawerOpen}
-           >
-          <PublishRoundedIcon style={{fontSize:'50px', color:'grey'}}/>
-           <label className="file-upload__icon">
-           <FileBase 
-            // className={classes.fileInput}
-            type="file" 
-            multiple={false} 
-            onDone={({base64}) => setPostData({...postData, selectedFile: base64})} />
-            
-            </label>
-            
-           {/* <input 
-             type="file" 
-             hidden/> */}
-          </IconButton>
-          <div>
-          Click to Upload Image!
-          </div>
-          </div>
-          }
-            </div>
-          </div>
-              
-          
-            {/* <div style={{marginBottom:'1px', position:'absolute', display:'flex', flexDirection:'row', bottom:'10px', right:'10px', justifyContent:'center'}}> */}
-            <Button variant="contained" type="submit" className={classes.postButton} >Post!</Button>
-            {/* <Button variant="contained" className={classes.cancelButton} onClick={handleClose}>Cancel</Button> */}
-              </form>
-            {/* </div> */}
-              </Card>
-        {/* <CircularProgress color="inherit" /> */}
+        </Card>
       </Backdrop>
+      }
+      
     </div>
      );
 }

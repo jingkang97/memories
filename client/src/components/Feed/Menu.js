@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleMenu({post}) {
 const classes = useStyles();
+const user = JSON.parse(localStorage.getItem('profile'));
 
 const [postData, setPostData] = useState({
   caption: post.caption,
@@ -107,10 +108,19 @@ const [postData, setPostData] = useState({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updatePost(post._id, postData))
+    // dispatch(updatePost(post._id, postData))
+    dispatch(updatePost(post._id, {...postData, username: user?.result?.username}))
+
     setOpen(false);
   }
   
+  // if(!user?.result?.username){
+  //   <Backdrop className={classes.backdrop} open={open} >
+  //       <Card className={classes.card}>
+  //         Please sign in to create your own memories and like other's memories
+  //       </Card>
+  //     </Backdrop>
+  // }
 
   return (
     <div>
@@ -131,53 +141,70 @@ const [postData, setPostData] = useState({
         <MenuItem onClick={handleToggle}><div style={{display:'flex', flexDirection:'row', alignItems:'center', color:'white'}}><EditOutlinedIcon style={{marginRight:'5px'}}/> Edit</div></MenuItem>
         <MenuItem onClick={handleClose}><div style={{display:'flex', flexDirection:'row', alignItems:'center', color:'white'}}><LinkRoundedIcon style={{marginRight:'5px'}}/> Share</div></MenuItem>
       </Menu>
-      <Backdrop className={classes.backdrop} open={open} >
+      {user?.result?.username ? 
+       <Backdrop className={classes.backdrop} open={open} >
+       <Card className={classes.card}>
+       
+       <div style={{position:'absolute', right:'5px', top:'5px'}}>
+               <IconButton size="small" onClick={handleCloseEdit}>
+                   <CloseRoundedIcon style={{color:'grey'}}/>
+               </IconButton>
+           </div>
+           <div style={{fontFamily:'Roobert', fontWeight:'bold', fontSize:'20px', display:'flex', flexDirection:'row', justifyContent:'center', marginBottom:'10px'}}>
+               Edit Post
+           </div>
+           <Divider classes={{root: classes.divider}}/>
+           <form style={{width:'100%'}} onSubmit={handleSubmit}>
+           
+           <div style={{marginTop:'10px'}}>
+               <div style={{display:'flex', flexDirection:'row'}}>
+               <Avatar alt="P" src="" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}/>
+               <div style={{marginLeft:'10px'}}>
+                   User
+               </div>
+               </div>
+               <div style={{height:'90px', overflow:'scroll', marginTop:'10px'}}>
+           <TextField 
+           style={{marginBottom:'20px', width:'100%', color:'white'}}
+           multiline
+           value={postData.caption}
+           // onChange={handleChange}
+           onChange={(e) => setPostData({...postData, caption: e.target.value})}
+           rows={4}
+           InputProps={{ 
+               className: classes.input,
+               disableUnderline: true }}
+           placeholder="What's on your mind?"
+
+           />
+           </div>
+           <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', border:'1px solid grey', marginBottom:'20px',height:'150px', borderRadius:'10px', overflow:'scroll'}}>
+
+           <img src={post.selectedFile}style={{height:'300px', width:'100%'}}/>
+           </div>
+         </div>
+
+       <Button className={classes.saveButton} type="submit">Done</Button>
+       </form>
+       </Card>
+       
+     </Backdrop>
+      
+      
+      : <Backdrop className={classes.backdrop} open={open} >
         <Card className={classes.card}>
-        
         <div style={{position:'absolute', right:'5px', top:'5px'}}>
-                <IconButton size="small" onClick={handleCloseEdit}>
-                    <CloseRoundedIcon style={{color:'grey'}}/>
-                </IconButton>
-            </div>
-            <div style={{fontFamily:'Roobert', fontWeight:'bold', fontSize:'20px', display:'flex', flexDirection:'row', justifyContent:'center', marginBottom:'10px'}}>
-                Edit Post
-            </div>
-            <Divider classes={{root: classes.divider}}/>
-            <form style={{width:'100%'}} onSubmit={handleSubmit}>
-            
-            <div style={{marginTop:'10px'}}>
-                <div style={{display:'flex', flexDirection:'row'}}>
-                <Avatar alt="P" src="" style={{backgroundColor:'#9047ff', fontFamily:'Roobert', fontWeight:'bold'}}/>
-                <div style={{marginLeft:'10px'}}>
-                    User
-                </div>
-                </div>
-                <div style={{height:'90px', overflow:'scroll', marginTop:'10px'}}>
-            <TextField 
-            style={{marginBottom:'20px', width:'100%', color:'white'}}
-            multiline
-            value={postData.caption}
-            // onChange={handleChange}
-            onChange={(e) => setPostData({...postData, caption: e.target.value})}
-            rows={4}
-            InputProps={{ 
-                className: classes.input,
-                disableUnderline: true }}
-            placeholder="What's on your mind?"
-
-            />
-            </div>
-            <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', border:'1px solid grey', marginBottom:'20px',height:'150px', borderRadius:'10px', overflow:'scroll'}}>
-
-            <img src={post.selectedFile}style={{height:'300px', width:'100%'}}/>
-            </div>
+              <IconButton size="small" onClick={handleCloseEdit}>
+                  <CloseRoundedIcon style={{color:'grey'}}/>
+              </IconButton>
           </div>
-
-        <Button className={classes.saveButton} type="submit">Done</Button>
-        </form>
+          <div style={{height: '420px', width:'100%', display:'flex', flexDirection:'center', justifyContent: 'center', alignItems: 'center'}}>
+            Please sign in to create your own memories and like other's memories
+          </div>
+          
         </Card>
-        
-      </Backdrop>
+      </Backdrop>}
+     
     </div>
   );
 }
